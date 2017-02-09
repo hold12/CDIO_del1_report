@@ -9,7 +9,7 @@ We have read the client description for the User-Administration Module, in the f
         The program shall consist of a menu with 4 items: Add user, Show users, Update user and Remove user.\\
         \textbf{Use Case Flow:}
         Something something.\\
-        \textbf{Requirements:}
+        \textbf{Requirement references:}
         Something something.
     \end{adjustwidth}
     
@@ -25,7 +25,7 @@ We have read the client description for the User-Administration Module, in the f
         \end{itemize}
         \textbf{Use Case Flow:}
         Something something.\\
-        \textbf{Requirements:}
+        \textbf{Requirement references:}
         Something something.
     \end{adjustwidth}
 
@@ -35,11 +35,11 @@ We have read the client description for the User-Administration Module, in the f
         There shall be modulus 11 validation on each CPR number except for people born 1st of January.\\
         \textbf{Use Case Flow:}
         Something something.\\
-        \textbf{Requirements:}
+        \textbf{Requirement references:}
         Something something.
     \end{adjustwidth}
     
-    \subsubsection*{FU04: Create User}
+    \subsubsection*{FU04: Add user}
     \begin{adjustwidth}{1em}{0pt}
         \textbf{Description:}
         The system's add user function shall receive the following information:
@@ -54,14 +54,16 @@ We have read the client description for the User-Administration Module, in the f
             \end{itemize}
         \end{multicols}
         \textbf{Use Case Flow:}
-        1. The user is prompted for user ID and enters this.
-        2. The user is prompted for a username and enters this.
-        3. The user is prompted for initials and enters this.
-        4. The user is prompted for CPR and enters this.
-        5. The user is prompted for password and enters this.
-        roles.\\
-        2. The user enters these values.\\
-        \textbf{Requirements:}
+        Preconditions: None.\\
+        1. The user chooses "Add user" in the menu.\\
+        2. The user is prompted for user ID and enters this.\\
+        3. The user is prompted for a username and enters this.\\
+        4. The user is prompted for initials and enters this.\\
+        5. The user is prompted for CPR and enters this.\\
+        6. The user is prompted for password and enters this.\\
+        7. The user is prompted for a role and chooses the desired one.\\
+        Postconditions: The new user is added to the program.\\
+        \textbf{Requirement references:}
         Something something.
     \end{adjustwidth}
     
@@ -73,27 +75,32 @@ We have read the client description for the User-Administration Module, in the f
         Preconditions: None.\\
         1. The user chooses "Show users" in the menu.\\
         Postconditions: The user is shown a comma-separated list of user IDs and their corresponding name.\\
-        \textbf{Requirements:}
+        \textbf{Requirement references:}
         Something something.
     \end{adjustwidth}
     
     \subsubsection*{FU06: Update user}
     \begin{adjustwidth}{1em}{0pt}
         \textbf{Description:}
-        Something something.\\
+        The information on users shall be able to update.\\
         \textbf{Use Case Flow:}
         Something something.\\
-        \textbf{Requirements:}
-        Something something.
+        \textbf{Requirement references:}
+        Preconditions: None.\\
+        1. The user chooses "Update user" in the menu.\\
+        2. The user is prompted to enter the user ID of the user he wants to update.\\
+        3. The user is prompted to enter the field he wants to update.\\
+        4. The user is prompted for the new value of the chosen field and enters this.\\
+        Postconditions: The chosen field of the chosen user is updated.\\
     \end{adjustwidth}
     
     \subsubsection*{FU07: Remove user}
     \begin{adjustwidth}{1em}{0pt}
         \textbf{Description:}
-        Something something.\\
+        The system shall allow for a user to be removed.\\
         \textbf{Use Case Flow:}
         Something something.\\
-        \textbf{Requirements:}
+        \textbf{Requirement references:}
         Something something.
     \end{adjustwidth}
 \end{adjustwidth}

@@ -1,19 +1,110 @@
 \section{Requirement Specification}
 We have read the client description for the User-Administration Module, in the following called the program, and based on that made the following requirement specification.
 
-\subsection*{Functional requirements}
+\subsection{Functional requirements}
 \begin{adjustwidth}{2em}{0pt}
-    \subsubsection*{FU01: Menu}
+    
+    \subsubsection*{FU01: Add user}
     \begin{adjustwidth}{1em}{0pt}
         \textbf{Description:}
-        The program shall consist of a menu with 4 items: Add user, Show users, Update user and Remove user.\\
-        \textbf{Use Case Flow:}
-        Something something.\\
+        The operator shall be able to add new users to the program. The program shall receive the following information about the new user:
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item User ID (PrimaryKey)
+                \item Username (2-20 characters)
+                \item Initials (2-4 characters)
+                \item CPR (10 characters)
+                \item Roles (one of the following: Admin, Pharmacist, Foreman, Operator)
+            \end{itemize}
+        \end{multicols}
+        \noindent\textbf{Use Case Flow:}
+        Preconditions: None.\\
+        1. The operator chooses "Add user" in the menu.\\
+        2. The operator is prompted for user ID and enters this.\\
+        3. The operator is prompted for a username and enters this.\\
+        4. The operator is prompted for initials and enters this.\\
+        5. The operator is prompted for CPR and enters this.\\
+        6. The operator is prompted for a role and chooses the desired one.\\
+        Postconditions: The new user is added to the program.\\
         \textbf{Requirement references:}
-        Something something.
+        FU05.
     \end{adjustwidth}
     
-    \subsubsection*{FU02: Password}
+    \subsubsection*{FU02: Show users}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The operator shall be able to show all users registered in the program.\\
+        \textbf{Use Case Flow:}
+        Preconditions: None.\\
+        1. The operator chooses "Show users" in the menu.\\
+        Postconditions: The operator is shown a comma-separated list of user IDs and their corresponding name.\\
+        \textbf{Requirement references:}
+        None.
+    \end{adjustwidth}
+    
+    \subsubsection*{FU03: Update user}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The operator shall be able to update information on the users.\\
+        \textbf{Use Case Flow:}
+        Preconditions: None.\\
+        1. The operator chooses "Update user" in the menu.\\
+        2. The operator is prompted to enter the user ID of the user he wants to update.\\
+        3. The operator is prompted to enter the field he wants to update.\\
+        4. The operator is prompted for the new value of the chosen field and enters this.\\
+        Postconditions: The chosen field of the chosen user is updated.\\
+        \textbf{Requirement references:}
+        RE01.
+    \end{adjustwidth}
+    
+    \subsubsection*{FU04: Remove user}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The operator shall be able to remove a user.\\
+        \textbf{Use Case Flow:}
+        Preconditions: None.\\
+        1. The operator is prompted to enter the user ID of the user he wants to delete.\\
+        2. The operator is prompted to verify his action, by clicking "Yes, I am sure I want to delete this user".\\
+        Postconditions: The user is removed from the program.\\
+        \textbf{Requirement references:}
+        None.
+    \end{adjustwidth}
+    
+    \subsubsection*{FU05: Password generation}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The program shall generate a password for the user automatically upon creation.\\
+        \noindent\textbf{Use Case Flow:}
+        Preconditions: \\
+        1. \\
+        Postconditions: \\
+        \textbf{Requirement references:}
+        RE01.
+    \end{adjustwidth}
+    
+\end{adjustwidth}
+
+\subsection{Usability requirements}
+\begin{adjustwidth}{2em}{0pt}
+
+    \subsubsection*{US01: Main Menu}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The program shall consist of a menu with 5 items: Add user, Show users, Update user, Remove user and Close program.\\
+        %\textbf{Use Case Flow:}
+        %1. The operator is prompted with a selection of inputs, to be written into the TUI.\\
+        %2. The operator will choose one of these selections from the menu.\\
+        %3. The operator selects create user and prompts the TUI.\\
+        \textbf{Requirement references:}
+        FU01, FU02, FU03, FU04.
+    \end{adjustwidth}
+    
+\end{adjustwidth}
+
+\subsection{Reliability requirements}
+\begin{adjustwidth}{2em}{0pt}
+
+    \subsubsection*{RE01: Password}
     \begin{adjustwidth}{1em}{0pt}
         \textbf{Description:}
         The password shall contain at least 6 characters of at least 3 of the following 4 categories: 
@@ -23,101 +114,44 @@ We have read the client description for the User-Administration Module, in the f
             \item numbers ('0' to '9')
             \item special  characters ('.', '-', '\_', '+', '!', '?', '=')
         \end{itemize}
-        \textbf{Use Case Flow:}
-        Something something.\\
         \textbf{Requirement references:}
-        Something something.
+        FU05.
     \end{adjustwidth}
 
-    \subsubsection*{FU03: CPR Validation}
+    \subsubsection*{RE02: CPR Validation}
     \begin{adjustwidth}{1em}{0pt}
         \textbf{Description:}
-        There shall be modulus 11 validation on each CPR number except for people born 1st of January.\\
-        \textbf{Use Case Flow:}
-        Something something.\\
+        There shall be validation on the first six digits of the CPR number, to check if it is a valid date. The length of the CPR number shall also be validated to be 10 digits.\\
         \textbf{Requirement references:}
-        Something something.
+        None.
+    \end{adjustwidth}
+
+    \subsubsection*{RE03: UserID Validation}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The user id shall be an integer between 11 and 99 and has to be unique for the user.\\
+        \textbf{Requirement references:}
+        None.
     \end{adjustwidth}
     
-    \subsubsection*{FU04: Add user}
-    \begin{adjustwidth}{1em}{0pt}
-        \textbf{Description:}
-        The system's add user function shall receive the following information:
-        \begin{multicols}{2}
-            \begin{itemize}
-                \item User ID (PrimaryKey)
-                \item Username
-                \item Initials (4 characters)
-                \item CPR
-                \item Password
-                \item Roles
-            \end{itemize}
-        \end{multicols}
-        \textbf{Use Case Flow:}
-        Preconditions: None.\\
-        1. The user chooses "Add user" in the menu.\\
-        2. The user is prompted for user ID and enters this.\\
-        3. The user is prompted for a username and enters this.\\
-        4. The user is prompted for initials and enters this.\\
-        5. The user is prompted for CPR and enters this.\\
-        6. The user is prompted for password and enters this.\\
-        7. The user is prompted for a role and chooses the desired one.\\
-        Postconditions: The new user is added to the program.\\
-        \textbf{Requirement references:}
-        Something something.
-    \end{adjustwidth}
-    
-    \subsubsection*{FU05: Show users}
-    \begin{adjustwidth}{1em}{0pt}
-        \textbf{Description:}
-        The user shall be able to show all users registered in the program\\
-        \textbf{Use Case Flow:}
-        Preconditions: None.\\
-        1. The user chooses "Show users" in the menu.\\
-        Postconditions: The user is shown a comma-separated list of user IDs and their corresponding name.\\
-        \textbf{Requirement references:}
-        Something something.
-    \end{adjustwidth}
-    
-    \subsubsection*{FU06: Update user}
-    \begin{adjustwidth}{1em}{0pt}
-        \textbf{Description:}
-        The information on users shall be able to update.\\
-        \textbf{Use Case Flow:}
-        Something something.\\
-        \textbf{Requirement references:}
-        Preconditions: None.\\
-        1. The user chooses "Update user" in the menu.\\
-        2. The user is prompted to enter the user ID of the user he wants to update.\\
-        3. The user is prompted to enter the field he wants to update.\\
-        4. The user is prompted for the new value of the chosen field and enters this.\\
-        Postconditions: The chosen field of the chosen user is updated.\\
-    \end{adjustwidth}
-    
-    \subsubsection*{FU07: Remove user}
-    \begin{adjustwidth}{1em}{0pt}
-        \textbf{Description:}
-        The system shall allow for a user to be removed.\\
-        \textbf{Use Case Flow:}
-        Something something.\\
-        \textbf{Requirement references:}
-        Something something.
-    \end{adjustwidth}
 \end{adjustwidth}
 
-\subsection*{Usability requirements}
+\subsection{Performance requirements}
+\begin{adjustwidth}{2em}{0pt}
 
+    None.
 
-\subsection*{Reliability requirements}
+\end{adjustwidth}
 
+\subsection{Supportability requirements}
+\begin{adjustwidth}{2em}{0pt}
 
-\subsection*{Performance requirements}
+    \subsubsection*{SU01: Translation}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The program shall be translatable.\\
+        \textbf{Requirement references:}
+        None.
+    \end{adjustwidth}
 
-
-\subsection*{Supportability requirements}
-
-
-%\begin{tabular}{c|l}
-%        & Description \\ \hline
-%    1   & 
-%\end{tabular}
+\end{adjustwidth}

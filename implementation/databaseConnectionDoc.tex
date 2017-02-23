@@ -1,0 +1,76 @@
+\clearpage
+\section{Database Connection}
+
+The \texttt{DBConnection} class has the responsibility for accessing the database. Not necessarily fetching specific data, but responsibility to open, close a connection and execute queries in the database.
+
+To use the \texttt{DBConnection}, an object of type \texttt{DBConnection} must be instantiated. The \texttt{query} method is used to execute queries on the database, and return a \texttt{ResultSet}. The first thing it does, is opening a connection to the database. If the connection cannot be established, the method returns \texttt{null}, otherwise it tries to execute the wanted query and return the \texttt{ResultSet} received from the database server.
+
+\subsection{Usage}
+Here is an example on how to use the \texttt{DBConnection}. In the main method, one must start by initializing a \texttt{DBConnection} object (note that we are using the \texttt{dal} package in the class):
+
+\begin{listing}[ht]
+\begin{minted}[frame=lines,linenos]{java}
+public static void main(String[] args) {
+    DBConnection conn = new DBConnection(
+        "localhost", 3306, "my-db", "root", "root-Passw0rd!"
+    );
+    
+    ResultSet results = conn.query("SELECT * from SomeTable");
+    
+    try {
+        while(results.next()) {
+            System.out.println(results.getString("FirstName"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        conn.close();
+    }
+}
+\end{minted}
+\caption{Connecting to, and selecting data from a database}
+\label{listing:1}
+\end{listing}
+
+When executing line 6 (\texttt{DBConnection::query}), the \texttt{open} method in the \texttt{DBConnection} class is called, and the database connection has to be manually closed at line 15 (\texttt{DBConnection::close}).
+
+%\subsection{Table migration}
+%Text describing how to migrate the database layout (not implemented yet).
+
+\subsection{List Users}
+This is an example on how to list all or just one user from the database:
+
+\begin{listing}[ht]
+\begin{minted}[frame=lines,linenos]{java}
+public void main(String[] args) {
+    DBConnection dbConn = new DBConnection(
+        "localhost", 3306, "my-db", "root", "root-Passw0rd!"
+    );
+    
+    // The DBConnection object instantiated before
+    UserAdministrationDB userAdmDB = new UserAdministrationDB(dbConn); 
+    
+    try {
+        // List all users in the database
+        userAdmDB.getUserList().stream().forEach(System.out::println); 
+    } catch (IUserAdministration.DataAccessException e) {
+        System.err.println(
+            "An error occurred during listing all users from the database."
+        );
+        e.printStackTrace();
+    }
+    
+    try {
+        // Print user with ID = 1
+        System.out.println(userAdmDB.getUser(1));                      
+    } catch (IUserAdministration.DataAccessException e) {
+        System.err.println(
+            "An error occurred when trying to fetch user with ID = 1."
+        );
+        e.printStackTrace();
+    }
+}
+\end{minted}
+\caption{Fetch users from the database}
+\label{listing:2}
+\end{listing}

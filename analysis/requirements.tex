@@ -10,11 +10,11 @@ We have read the client description for the User-Administration Module, in the f
         The operator shall be able to add new users to the program. The program shall receive the following information about the new user:
         \begin{multicols}{2}
             \begin{itemize}
-                \item User ID (PrimaryKey)
-                \item Username (2-20 characters)
-                \item Initials (2-4 characters)
-                \item CPR (10 characters)
-                \item Roles (one of the following: Admin, Pharmacist, Foreman, Operator)
+                \item User ID
+                \item Username
+                \item Initials
+                \item CPR
+                \item Roles
             \end{itemize}
         \end{multicols}
         \noindent\textbf{Use Case Flow:}
@@ -134,6 +134,41 @@ We have read the client description for the User-Administration Module, in the f
         None.
     \end{adjustwidth}
     
+    \subsubsection*{RE04: Roles Validation}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The roles shall be one of the following:
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item Admin
+                \item Pharmacist
+                \item Foreman
+                \item Operator
+            \end{itemize}
+        \end{multicols}
+        \textbf{Requirement references:}
+        None.
+    \end{adjustwidth}
+    
+    \subsubsection*{RE04: Initials Validation}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The initials shall have a length of 2 to 4 characters.\\
+        \textbf{Requirement references:}
+        None.
+    \end{adjustwidth}
+    
+    \subsubsection*{RE04: Username Validation}
+    \begin{adjustwidth}{1em}{0pt}
+        \textbf{Description:}
+        The username shall have a length of 2 to 20 characters.\\
+        The username shall have at least 1 non-numeric character.\\
+        \textbf{Requirement references:}
+        None.
+    \end{adjustwidth}
+    
+    
+    
 \end{adjustwidth}
 
 \subsection{Performance requirements}
@@ -149,7 +184,7 @@ We have read the client description for the User-Administration Module, in the f
     \subsubsection*{SU01: Translation}
     \begin{adjustwidth}{1em}{0pt}
         \textbf{Description:}
-        The program shall be translatable.\\
+        The program shall be translatable by locales.\\
         \textbf{Requirement references:}
         None.
     \end{adjustwidth}

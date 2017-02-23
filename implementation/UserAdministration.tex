@@ -1,0 +1,113 @@
+\section{Administrating Users}
+
+Using the \texttt{UserAdministrationDB} class it is easy to manage users in the database. There are a few essential methods in this class that makes it a lot easier to manage all the users in the database.
+
+First step to manage your users is to list all users in the database. The \texttt{getUsersList} method does just that. It returns a list of users. Using it is quite simple:
+
+\begin{listing}[ht]
+\begin{minted}[frame=lines,linenos]{java}
+public static void main(String[] args) {
+    DBConnection dbConnection = new DBConnection(
+        "localhost", 3306, "my-db", "root", "root-Passw0rd!"
+    );
+    
+    UserAdministrationDB userAdm = new UserAdministrationDB(dbConnection);
+    
+    List<User> users;
+    try {
+        users = userAdm.getUserList();
+    } catch(IUserAdministration.DataAccessException e) {
+        System.err.prinln(e.getMessage());
+        e.printStackTrace();
+        return;
+    }
+    
+    users.stream().forEach(System.out::println);
+}
+\end{minted}
+\caption{Get a List of Users}
+\label{listing:3}
+\end{listing}
+
+It is easy to see that it is a lot easier to use the database using the \texttt{UserAdministrationDB} class.
+
+One of the cool features of this class is when it comes to editing existing users. Lets say we have the following user:
+
+\begin{multicols}{2}
+    \begin{itemize}
+        \item \textbf{ID}: 11
+        \item \textbf{Username}: My User
+        \item \textbf{Initials}: myus
+        \item \textbf{Roles}: Admin, Foreman
+        \item \textbf{CPR}: 1010901235
+        \item \textbf{Password}: l-m2Ehdc
+        \
+    \end{itemize}
+\end{multicols}
+
+Say we want to edit the username to \textbf{John Doe}, initials to \textbf{jodo}. Remove the \textbf{Admin} role and instead give him the \textbf{Operator} role, and then lastly, generate a new password for him, we could do it in a quite neat way. The way the \texttt{updateUser} method in \texttt{UserAdministrationDB} works is, it takes a user in as an argument, then pulls the "\textit{old}" user by his \textit{id} from the database, compares all values, and then only changing what has been changed. Here is an example:
+
+\begin{listing}[ht]
+\begin{minted}[frame=lines,linenos]{java}
+public static void main(String[] args) {
+    DBConnection dbConnection = new DBConnection(
+        "localhost", 3306, "my-db", "root", "root-Passw0rd!"
+    );
+    
+    UserAdministrationDB userAdm = new UserAdministrationDB(dbConnection);
+    List<String> roles = new ArrayList<>();
+    roles.add("Admin"); roles.add("Foreman");
+    
+    User myUser = new User(11, "My User", "myus", roles, "1010901235");
+    
+    // Now, let's change the user
+    user.setUserName("John Doe");
+    user.setInitials("jodo");
+    user.removeRole("Foreman");
+    user.addRole("Operator");
+    user.generateNewPassword();
+    
+    // Now just update the user in the database
+    try {
+        userAdm.updateUser(myUser); 
+    } catch (IUserAdministration.DataAccessException e) {
+        System.err.println(e.getMessage());
+    }
+}
+\end{minted}
+\caption{Editing a User}
+\label{listing:4}
+\end{listing}
+
+\texttt{UserAdministrationDB} has a quite is detecting changes by comparing the user given in the argument with the current user (with the same id) in the database:
+
+\begin{listing}[ht]
+\begin{minted}[frame=lines,linenos]{java}
+public void updateUser(User user) throws DataAccessException {
+    final User oldUser = getUser(user.getUserId());
+    
+    // This is to keep an eye on the count of changes
+    int changeCount = 0;
+    // We are not defining the whole statement yet, 
+    // because we still do not know what changes has been made.
+    String sql = "UPDATE user SET";
+    
+    if (!oldUser.getUserName().equals(user.getUserName())) {
+        // If the changeCount is greater than zero, we need to add a comma
+        // to seperate each field that gets updated
+        if (changeCount > 0) sql += ", ";
+        changeCount++;
+        
+        // Note that we are not using any prepared statements
+        sql += " username = '" + user.getUserName() + "'";
+    }
+    if (...) {
+        ...
+    }    
+}
+\end{minted}
+\caption{Editing a User}
+\label{listing:4}
+\end{listing}
+
+This way, it is way easier to manage users and use this class.

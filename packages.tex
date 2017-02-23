@@ -1,11 +1,26 @@
 \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}   % needed by babel
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\graphicspath{ {images/} }
 \usepackage{titling}
 \usepackage{changepage}
 \usepackage{enumitem}
-\usepackage{multicol}
+\usepackage{multicol} % for multi column lists etc.
 \usepackage{array}
 \usepackage{lastpage}
+\usepackage{geometry}
+\usepackage{minted} % for syntax highlighting (code)
+\usemintedstyle{colorful}
+
+\usepackage{hyperref} % For TOC and reference linking. NB. should be last package to get imported.
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\urlstyle{same} % Makes links (\url{}) have normal font instead of monospace.
